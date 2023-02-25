@@ -16,6 +16,8 @@
 		94EEC1DB29A9703C00BC839F /* MovieTecUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1DA29A9703C00BC839F /* MovieTecUITests.swift */; };
 		94EEC1DD29A9703C00BC839F /* MovieTecUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1DC29A9703C00BC839F /* MovieTecUITestsLaunchTests.swift */; };
 		94EEC1EA29A9767700BC839F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1E929A9767700BC839F /* LoginViewController.swift */; };
+		94EEC1EF29A97DA800BC839F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */; };
+		94EEC1F229A97E4400BC839F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F129A97E4400BC839F /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		94EEC1DA29A9703C00BC839F /* MovieTecUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTecUITests.swift; sourceTree = "<group>"; };
 		94EEC1DC29A9703C00BC839F /* MovieTecUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTecUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		94EEC1E929A9767700BC839F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		94EEC1F129A97E4400BC839F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		94EEC1B529A9703A00BC839F /* MovieTec */ = {
 			isa = PBXGroup;
 			children = (
+				94EEC1F029A97E2E00BC839F /* View */,
 				94EEC1ED29A976A200BC839F /* View Model */,
 				94EEC1EC29A9769500BC839F /* Model */,
 				94EEC1EB29A9768500BC839F /* Controller */,
@@ -147,8 +152,17 @@
 		94EEC1ED29A976A200BC839F /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		94EEC1F029A97E2E00BC839F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94EEC1F129A97E4400BC839F /* LoginView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,9 +295,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EEC1F229A97E4400BC839F /* LoginView.swift in Sources */,
 				94EEC1C129A9703A00BC839F /* MovieTec.xcdatamodeld in Sources */,
 				94EEC1B729A9703A00BC839F /* AppDelegate.swift in Sources */,
 				94EEC1EA29A9767700BC839F /* LoginViewController.swift in Sources */,
+				94EEC1EF29A97DA800BC839F /* LoginViewModel.swift in Sources */,
 				94EEC1B929A9703A00BC839F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

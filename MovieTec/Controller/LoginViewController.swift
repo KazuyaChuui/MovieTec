@@ -8,12 +8,17 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-
+    override func loadView() {
+        self.view = LoginView(viewModel: LoginViewModel())
+    }
+    
+    // MARK: - Methods
+    
     /*
     // MARK: - Navigation
 
