@@ -18,6 +18,10 @@
 		94EEC1EA29A9767700BC839F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1E929A9767700BC839F /* LoginViewController.swift */; };
 		94EEC1EF29A97DA800BC839F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */; };
 		94EEC1F229A97E4400BC839F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F129A97E4400BC839F /* LoginView.swift */; };
+		94EEC1F429A9C7F900BC839F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F329A9C7F900BC839F /* Movie.swift */; };
+		94EEC1F629A9C90A00BC839F /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F529A9C90A00BC839F /* MoviesViewController.swift */; };
+		94EEC1F829A9C92F00BC839F /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F729A9C92F00BC839F /* MoviesViewModel.swift */; };
+		94EEC1FA29A9C94500BC839F /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1F929A9C94500BC839F /* MoviesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		94EEC1E929A9767700BC839F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		94EEC1F129A97E4400BC839F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		94EEC1F329A9C7F900BC839F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		94EEC1F529A9C90A00BC839F /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		94EEC1F729A9C92F00BC839F /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
+		94EEC1F929A9C94500BC839F /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				94EEC1E929A9767700BC839F /* LoginViewController.swift */,
+				94EEC1F529A9C90A00BC839F /* MoviesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -145,6 +154,7 @@
 		94EEC1EC29A9769500BC839F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				94EEC1F329A9C7F900BC839F /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */,
+				94EEC1F729A9C92F00BC839F /* MoviesViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -161,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				94EEC1F129A97E4400BC839F /* LoginView.swift */,
+				94EEC1F929A9C94500BC839F /* MoviesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,12 +307,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EEC1F429A9C7F900BC839F /* Movie.swift in Sources */,
 				94EEC1F229A97E4400BC839F /* LoginView.swift in Sources */,
 				94EEC1C129A9703A00BC839F /* MovieTec.xcdatamodeld in Sources */,
 				94EEC1B729A9703A00BC839F /* AppDelegate.swift in Sources */,
+				94EEC1F829A9C92F00BC839F /* MoviesViewModel.swift in Sources */,
+				94EEC1FA29A9C94500BC839F /* MoviesView.swift in Sources */,
 				94EEC1EA29A9767700BC839F /* LoginViewController.swift in Sources */,
 				94EEC1EF29A97DA800BC839F /* LoginViewModel.swift in Sources */,
 				94EEC1B929A9703A00BC839F /* SceneDelegate.swift in Sources */,
+				94EEC1F629A9C90A00BC839F /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
