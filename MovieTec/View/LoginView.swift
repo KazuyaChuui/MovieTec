@@ -14,6 +14,7 @@ class LoginView: UIView, UITextFieldDelegate {
     private var btnLogin = UIButton(type: .system)
     private var logoImg = UIImageView()
     private let invalidLabel = UILabel()
+    private let moviesVC = MoviesViewController()
     
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -37,12 +38,14 @@ class LoginView: UIView, UITextFieldDelegate {
         self.addSubview(self.passwordTF)
         self.addSubview(self.btnLogin)
         self.addSubview(self.invalidLabel)
+        self.moviesVC.modalPresentationStyle = .fullScreen
         self.invalidLabel.isHidden = true
         self.btnLogin.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     }
     
     @objc func didTapButton(_ sender: UIButton) {
         //self.invalidLabel.isHidden = false
+        self.window?.rootViewController?.present(moviesVC, animated: true)
     }
     
     func styleViews(){
