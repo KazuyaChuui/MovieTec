@@ -12,6 +12,8 @@ class MoviesView: UIView {
     private let navBar = UINavigationBar(frame: .zero)
     private let navItem = UINavigationItem(title: "TV Shows")
     private let navBtn = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: #selector(didTapButton(_:)))
+    private let collectionV = UICollectionView()
+    private let layout = UICollectionViewFlowLayout()
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
@@ -33,8 +35,11 @@ class MoviesView: UIView {
     func setup() {
         self.navItem.rightBarButtonItem = navBtn
         self.navBar.delegate = self
+        self.collectionV.delegate = self
+        self.collectionV.dataSource = self
         
-        self.addSubview(navBar)
+        self.addSubview(self.navBar)
+        self.addSubview(self.collectionV)
         
         self.navBar.setItems([navItem], animated: false)
     }
@@ -46,6 +51,11 @@ class MoviesView: UIView {
         self.navBar.tintColor = .white
         self.navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.layout.headerReferenceSize = CGSizeMake(self.frame.width, 200)
+        self.collectionV.frame = self.frame
+        self.collectionV.collectionViewLayout = layout
+        self.collectionV.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupConstraints() {
@@ -55,6 +65,12 @@ class MoviesView: UIView {
             self.navBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.navBar.trailingAnchor.constraint(equalTo: self.trailingAnchor )
         ])
+        NSLayoutConstraint.activate([
+            self.collectionV.topAnchor.constraint(equalTo: self.navBar.bottomAnchor),
+            self.collectionV.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.collectionV.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.collectionV.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
 }
 
@@ -62,4 +78,16 @@ extension MoviesView: UINavigationBarDelegate {
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.topAttached
     }
+}
+
+extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+    }
+    
+    
 }
