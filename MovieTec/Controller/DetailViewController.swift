@@ -1,25 +1,23 @@
 //
-//  LoginViewController.swift
+//  DetailViewController.swift
 //  MovieTec
 //
-//  Created by Furry Ruiz on 24/02/23.
+//  Created by Furry Ruiz on 26/02/23.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    
+class DetailViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     override func loadView() {
-        self.view = LoginView(viewModel: LoginViewModel())
+        self.view = DetailView(viewModel: DetailViewModel())
     }
-    
-    // MARK: - Methods
-    
+
     /*
     // MARK: - Navigation
 

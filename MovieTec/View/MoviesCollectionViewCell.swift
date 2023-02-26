@@ -14,7 +14,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     private var name = UILabel()
     private var releaseDate = UILabel()
     private var rating = UILabel()
-    private var synopsis = UILabel()
+    private var overview = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +32,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(self.name)
         self.contentView.addSubview(self.releaseDate)
         self.contentView.addSubview(self.rating)
-        self.contentView.addSubview(self.synopsis)
+        self.contentView.addSubview(self.overview)
     }
     
     func styleViews(){
@@ -44,7 +44,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.name.translatesAutoresizingMaskIntoConstraints = false
         self.releaseDate.translatesAutoresizingMaskIntoConstraints = false
         self.rating.translatesAutoresizingMaskIntoConstraints = false
-        self.synopsis.translatesAutoresizingMaskIntoConstraints = false
+        self.overview.translatesAutoresizingMaskIntoConstraints = false
         
         self.poster.layer.cornerRadius = 15
         self.poster.image = #imageLiteral(resourceName: "Logo")
@@ -53,10 +53,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         styleLabel(self.name, text: "Hardcoded")
         styleLabel(self.releaseDate, text: "Hardcoded")
         styleLabel(self.rating, text: "★5")
-        self.synopsis.font = .systemFont(ofSize: UIFont.systemFontSize-3)
-        self.synopsis.textColor = .white
-        self.synopsis.text = "Hardoced Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 15"
-        self.synopsis.numberOfLines = 0
+        self.overview.font = .systemFont(ofSize: UIFont.systemFontSize-3)
+        self.overview.textColor = .white
+        self.overview.text = "Hardoced Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 15"
+        self.overview.numberOfLines = 0
         
     }
     
@@ -86,11 +86,11 @@ class MoviesCollectionViewCell: UICollectionViewCell {
             self.rating.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10)
         ])
         NSLayoutConstraint.activate([
-            self.synopsis.topAnchor.constraint(equalTo: self.rating.bottomAnchor),
-            self.synopsis.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10),
-            self.synopsis.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            self.synopsis.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
-            self.synopsis.heightAnchor.constraint(equalToConstant: 50)
+            self.overview.topAnchor.constraint(equalTo: self.rating.bottomAnchor),
+            self.overview.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10),
+            self.overview.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
+            self.overview.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            self.overview.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

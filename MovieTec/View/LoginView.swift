@@ -87,7 +87,6 @@ class LoginView: UIView, UITextFieldDelegate {
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             self.logoImg.bottomAnchor.constraint(equalTo: self.usernameTF.topAnchor, constant: -50),
             self.logoImg.centerXAnchor.constraint(equalTo: self.centerXAnchor),

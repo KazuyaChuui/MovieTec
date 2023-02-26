@@ -18,6 +18,7 @@ class MoviesView: UIView {
     private let segmentedCtrl = UISegmentedControl(items: ["Popular", "Top Rated", "On TV", "Airing Today"])
     private var collectionV: UICollectionView?
     private var navController: UINavigationController?
+    private var detailVC = DetailViewController()
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
@@ -112,6 +113,10 @@ extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
     
     // MARK: - Flow Layout

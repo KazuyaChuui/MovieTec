@@ -17,7 +17,6 @@ class ProfileView: UIView {
     private var profileImg = UIImageView()
     private let favorite = UILabel()
     private var collectionV: UICollectionView?
-
     
     
     init(viewModel: ProfileViewModel) {
