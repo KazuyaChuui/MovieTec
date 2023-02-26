@@ -14,9 +14,10 @@ class MoviesView: UIView {
     private var viewModel: MoviesViewModel
     private let navBar = UINavigationBar(frame: .zero)
     private let navItem = UINavigationItem(title: "TV Shows")
-    private let navBtn = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: #selector(didTapButton(_:)))
+    private let navBtn = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: nil, action: #selector(didTapButton(_:)))
     private let segmentedCtrl = UISegmentedControl(items: ["Popular", "Top Rated", "On TV", "Airing Today"])
     private var collectionV: UICollectionView?
+    private var navController: UINavigationController?
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
@@ -32,6 +33,8 @@ class MoviesView: UIView {
     }
     
     @objc func didTapButton(_ sender: UIBarButtonItem) {
+        //var vc = ProfileViewController()
+        //self.inputViewController?.present(vc, animated: true)
         
     }
     
@@ -41,7 +44,7 @@ class MoviesView: UIView {
     
     func setup() {
         self.navItem.rightBarButtonItem = navBtn
-        self.navBar.delegate = self
+        //self.navBar.delegate = self
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -50,8 +53,8 @@ class MoviesView: UIView {
         self.collectionV!.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: MoviesCollectionViewCell.identifier)
         self.collectionV!.delegate = self
         self.collectionV!.dataSource = self
-        
-        self.addSubview(self.navBar)
+                
+        //self.addSubview(self.navBar)
         self.addSubview(self.segmentedCtrl)
         self.addSubview(self.collectionV!)
         
@@ -78,18 +81,14 @@ class MoviesView: UIView {
     
     func setupConstraints() {
         
+        
         NSLayoutConstraint.activate([
-            self.navBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            self.navBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.navBar.trailingAnchor.constraint(equalTo: self.trailingAnchor )
-        ])
-        NSLayoutConstraint.activate([
-            self.segmentedCtrl.topAnchor.constraint(equalTo: self.navBar.bottomAnchor, constant: 20),
+            self.segmentedCtrl.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.segmentedCtrl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             self.segmentedCtrl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
         ])
         NSLayoutConstraint.activate([
-            self.collectionV!.topAnchor.constraint(equalTo: self.segmentedCtrl.bottomAnchor, constant: 20),
+            self.collectionV!.topAnchor.constraint(equalTo: self.segmentedCtrl.bottomAnchor, constant: 10),
             self.collectionV!.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.collectionV!.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.collectionV!.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -102,6 +101,7 @@ extension MoviesView: UINavigationBarDelegate {
         return UIBarPosition.topAttached
     }
 }
+
 // MARK: - Collection View Delegate
 extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,10 +115,6 @@ extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     // MARK: - Flow Layout
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionV!.frame.width, height: 30)
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

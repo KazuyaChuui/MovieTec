@@ -49,6 +49,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.poster.layer.cornerRadius = 15
         self.poster.image = #imageLiteral(resourceName: "Logo")
         self.poster.clipsToBounds = true
+        self.poster.contentMode = .scaleAspectFill
         styleLabel(self.name, text: "Hardcoded")
         styleLabel(self.releaseDate, text: "Hardcoded")
         styleLabel(self.rating, text: "★5")

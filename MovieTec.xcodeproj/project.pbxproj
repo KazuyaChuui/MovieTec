@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		94D7B31D29AAE07300CD6739 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B31C29AAE07300CD6739 /* MoviesCollectionViewCell.swift */; };
 		94D7B32129AAE0B400CD6739 /* MoviesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B32029AAE0B400CD6739 /* MoviesCellViewModel.swift */; };
+		94D7B32329AB09E500CD6739 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B32229AB09E500CD6739 /* ProfileViewController.swift */; };
+		94D7B32529AB2B6600CD6739 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B32429AB2B6600CD6739 /* ProfileView.swift */; };
+		94D7B32729AB2BB800CD6739 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D7B32629AB2BB800CD6739 /* ProfileViewModel.swift */; };
 		94EEC1B729A9703A00BC839F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1B629A9703A00BC839F /* AppDelegate.swift */; };
 		94EEC1B929A9703A00BC839F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1B829A9703A00BC839F /* SceneDelegate.swift */; };
 		94EEC1C129A9703A00BC839F /* MovieTec.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94EEC1BF29A9703A00BC839F /* MovieTec.xcdatamodeld */; };
@@ -46,6 +49,9 @@
 /* Begin PBXFileReference section */
 		94D7B31C29AAE07300CD6739 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		94D7B32029AAE0B400CD6739 /* MoviesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCellViewModel.swift; sourceTree = "<group>"; };
+		94D7B32229AB09E500CD6739 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		94D7B32429AB2B6600CD6739 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		94D7B32629AB2BB800CD6739 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		94EEC1B329A9703A00BC839F /* MovieTec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94EEC1B629A9703A00BC839F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94EEC1B829A9703A00BC839F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 			children = (
 				94EEC1E929A9767700BC839F /* LoginViewController.swift */,
 				94EEC1F529A9C90A00BC839F /* MoviesViewController.swift */,
+				94D7B32229AB09E500CD6739 /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 				94EEC1EE29A97DA800BC839F /* LoginViewModel.swift */,
 				94D7B32029AAE0B400CD6739 /* MoviesCellViewModel.swift */,
 				94EEC1F729A9C92F00BC839F /* MoviesViewModel.swift */,
+				94D7B32629AB2BB800CD6739 /* ProfileViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -179,6 +187,7 @@
 				94EEC1F129A97E4400BC839F /* LoginView.swift */,
 				94EEC1F929A9C94500BC839F /* MoviesView.swift */,
 				94D7B31C29AAE07300CD6739 /* MoviesCollectionViewCell.swift */,
+				94D7B32429AB2B6600CD6739 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,8 +331,11 @@
 				94EEC1F829A9C92F00BC839F /* MoviesViewModel.swift in Sources */,
 				94EEC1FA29A9C94500BC839F /* MoviesView.swift in Sources */,
 				94EEC1EA29A9767700BC839F /* LoginViewController.swift in Sources */,
+				94D7B32729AB2BB800CD6739 /* ProfileViewModel.swift in Sources */,
 				94EEC1EF29A97DA800BC839F /* LoginViewModel.swift in Sources */,
+				94D7B32329AB09E500CD6739 /* ProfileViewController.swift in Sources */,
 				94EEC1B929A9703A00BC839F /* SceneDelegate.swift in Sources */,
+				94D7B32529AB2B6600CD6739 /* ProfileView.swift in Sources */,
 				94EEC1F629A9C90A00BC839F /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

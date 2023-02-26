@@ -45,6 +45,8 @@ class LoginView: UIView, UITextFieldDelegate {
     
     @objc func didTapButton(_ sender: UIButton) {
         //self.invalidLabel.isHidden = false
+        //self.window?.rootViewController?.present(moviesVC, animated: true)
+        self.window?.rootViewController = UINavigationController(rootViewController: moviesVC)
         self.window?.rootViewController?.present(moviesVC, animated: true)
     }
     
