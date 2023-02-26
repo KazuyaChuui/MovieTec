@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class MoviesView: UIView {
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     private let itemsPerRow: CGFloat = 2
     
+    @Published var cell: Int
     private var viewModel: MoviesViewModel
     private let navBar = UINavigationBar(frame: .zero)
     private let navItem = UINavigationItem(title: "TV Shows")
@@ -22,6 +24,7 @@ class MoviesView: UIView {
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
+        self.cell = -1
         super.init(frame: .zero)
         
         self.setup()
@@ -116,7 +119,7 @@ extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        cell = indexPath.row
     }
     
     // MARK: - Flow Layout

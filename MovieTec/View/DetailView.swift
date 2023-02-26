@@ -9,7 +9,7 @@ import UIKit
 
 class DetailView: UIView {
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-    private let itemsPerRow: CGFloat = 2
+    private let itemsPerRow: CGFloat = 3
     
     private var viewModel: DetailViewModel
     private var name = UILabel()
@@ -69,9 +69,11 @@ class DetailView: UIView {
         styleLabel(status, text: "hard")
         styleLabel(rating, text: "★5")
         
-        self.overview.text = "lorenhard"
+        self.overview.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem"
         self.overview.textColor = #colorLiteral(red: 0.5647058824, green: 0.8078431373, blue: 0.631372549, alpha: 1)
+        self.overview.numberOfLines = 0
         self.overview.font = .systemFont(ofSize: UIFont.systemFontSize)
+        self.overview.textAlignment = .justified
         
         let image = #imageLiteral(resourceName: "Logo")
         self.poster.image = image
@@ -89,7 +91,7 @@ class DetailView: UIView {
     func styleBtn(_ btn: UIButton) {
         btn.backgroundColor = .clear
         btn.tintColor = .red
-        btn.imageView?.image = UIImage(systemName: "heart.fill")
+        btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
     }
     
     func setupConstraints(){
@@ -110,38 +112,43 @@ class DetailView: UIView {
         NSLayoutConstraint.activate([
             self.poster.topAnchor.constraint(equalTo: self.topAnchor),
             self.poster.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.poster.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            self.poster.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.poster.bottomAnchor.constraint(equalTo: self.centerYAnchor)
         ])
         NSLayoutConstraint.activate([
-            self.name.topAnchor.constraint(equalTo: self.poster.bottomAnchor, constant: 50),
-            self.name.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            self.name.topAnchor.constraint(equalTo: self.poster.bottomAnchor, constant: 20),
+            self.name.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
         ])
         NSLayoutConstraint.activate([
-            self.favorite.topAnchor.constraint(equalTo: self.poster.bottomAnchor),
-            self.favorite.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
+            self.favorite.topAnchor.constraint(equalTo: self.poster.bottomAnchor, constant: 10),
+            self.favorite.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            self.favorite.heightAnchor.constraint(equalToConstant: 40),
+            self.favorite.widthAnchor.constraint(equalToConstant: 40)
         ])
         NSLayoutConstraint.activate([
             self.rating.topAnchor.constraint(equalTo: self.name.bottomAnchor),
-            self.rating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50)
+            self.rating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            self.rating.widthAnchor.constraint(equalToConstant: self.rating.intrinsicContentSize.width)
         ])
         NSLayoutConstraint.activate([
             self.releaseDate.topAnchor.constraint(equalTo: self.name.bottomAnchor),
-            self.releaseDate.leadingAnchor.constraint(equalTo: self.rating.leadingAnchor, constant: 10)
+            self.releaseDate.leadingAnchor.constraint(equalTo: self.rating.trailingAnchor, constant: 10)
         ])
         NSLayoutConstraint.activate([
             self.genres.topAnchor.constraint(equalTo: self.name.bottomAnchor),
-            self.genres.leadingAnchor.constraint(equalTo: self.releaseDate.leadingAnchor, constant: 10)
+            self.genres.leadingAnchor.constraint(equalTo: self.releaseDate.trailingAnchor, constant: 10)
         ])
         NSLayoutConstraint.activate([
             self.status.topAnchor.constraint(equalTo: self.name.bottomAnchor),
-            self.status.leadingAnchor.constraint(equalTo: self.genres.leadingAnchor, constant: 10)
+            self.status.leadingAnchor.constraint(equalTo: self.genres.trailingAnchor, constant: 10)
         ])
         NSLayoutConstraint.activate([
-            self.overview.topAnchor.constraint(equalTo: self.rating.bottomAnchor),
-            self.overview.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10)
+            self.overview.topAnchor.constraint(equalTo: self.rating.bottomAnchor, constant: 10),
+            self.overview.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            self.overview.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
         NSLayoutConstraint.activate([
-            self.collectionV!.topAnchor.constraint(equalTo: self.favorite.bottomAnchor),
+            self.collectionV!.topAnchor.constraint(equalTo: self.overview.bottomAnchor),
             self.collectionV!.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.collectionV!.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.collectionV!.trailingAnchor.constraint(equalTo: self.trailingAnchor)
@@ -157,7 +164,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        
+
         return cell
     }
     
@@ -169,7 +176,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let availableWidth = self.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         
-        return CGSize(width: widthPerItem, height: 300)
+        return CGSize(width: widthPerItem, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

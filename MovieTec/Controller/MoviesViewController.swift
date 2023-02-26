@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class MoviesViewController: UIViewController, UINavigationControllerDelegate {
 
+    private var selectedCell: MoviesView = MoviesView(viewModel: MoviesViewModel())
+    private var cancellables = Set<AnyCancellable>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TV Shows"
@@ -22,10 +26,21 @@ class MoviesViewController: UIViewController, UINavigationControllerDelegate {
         navigationController?.navigationBar.scrollEdgeAppearance = navBarApp
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(didTapButton))
+        
+        setupBindings()
     }
     
     override func loadView() {
-        self.view = MoviesView(viewModel: MoviesViewModel())
+        self.view = self.selectedCell
+    }
+    
+    func setupBindings(){
+        self.selectedCell.$cell.sink { cell in
+            if( cell != -1){
+                let vc = DetailViewController()
+                self.present(vc, animated: true)
+            }
+        }.store(in: &cancellables)
     }
     
     @objc func didTapButton() {
