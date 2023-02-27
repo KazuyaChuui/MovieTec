@@ -9,13 +9,15 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    var id: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     
     override func loadView() {
-        self.view = DetailView(viewModel: DetailViewModel())
+        self.view = DetailView(viewModel: DetailViewModel(), id: id!)
     }
 
     /*

@@ -21,7 +21,7 @@ class MoviesView: UIView {
     private var collectionV: UICollectionView?
     private var navController: UINavigationController?
     private var detailVC = DetailViewController()
-    var movies: Movies?
+    var movies: [Movies]?
     
     
     init(viewModel: MoviesViewModel) {
@@ -44,8 +44,30 @@ class MoviesView: UIView {
     }
     
     @objc func segmentedValueChanged(_ sender: UISegmentedControl) {
-        self.viewModel.getMovies(type: sender.selectedSegmentIndex) {
-            <#code#>
+        var movieType: String
+        
+        switch sender.selectedSegmentIndex {
+        case 0: movieType = "popular"
+        case 1: movieType = "top_rated"
+        case 2: movieType = "on_the_air"
+        case 3: movieType = "airing_today"
+        default: movieType = "popular"
+        }
+        
+        self.viewModel.getMovies(type: movieType) {
+            self.movies = self.viewModel.movieList
+            DispatchQueue.main.async { [weak self] in
+                self!.collectionV!.reloadData()
+            }
+        }
+    }
+    
+    func initialLoad() {
+        self.viewModel.getMovies(type: "popular") {
+            self.movies = self.viewModel.movieList
+            DispatchQueue.main.async { [weak self] in
+                self!.collectionV!.reloadData()
+            }
         }
     }
     
@@ -60,7 +82,7 @@ class MoviesView: UIView {
         self.collectionV!.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: MoviesCollectionViewCell.identifier)
         self.collectionV!.delegate = self
         self.collectionV!.dataSource = self
-                
+        self.initialLoad()
         //self.addSubview(self.navBar)
         self.addSubview(self.segmentedCtrl)
         self.addSubview(self.collectionV!)
@@ -111,17 +133,25 @@ extension MoviesView: UINavigationBarDelegate {
 // MARK: - Collection View Delegate
 extension MoviesView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if let total = self.movies?.count {
+            return total
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
+        if let movie = self.movies?[indexPath.row] {
+            cell.unwrappingSafe(movie: movie)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cell = indexPath.row
+        if let movie = self.movies?[indexPath.row] {
+            cell = movie.id
+        }
     }
     
     // MARK: - Flow Layout

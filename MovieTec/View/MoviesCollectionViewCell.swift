@@ -15,12 +15,17 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     private var releaseDate = UILabel()
     private var rating = UILabel()
     private var overview = UILabel()
+    var movieId: Int?
+    var movie: Movies?
+    var finalPath = "https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
+    var title = ""
+    var average = ""
+    var date = ""
+    var over = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
-        styleViews()
-        setupConstraints()
+        
     }
     
     required init?(coder: NSCoder){
@@ -47,17 +52,42 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.overview.translatesAutoresizingMaskIntoConstraints = false
         
         self.poster.layer.cornerRadius = 15
-        self.poster.image = #imageLiteral(resourceName: "Logo")
+        self.poster.load(from: URL(string: finalPath)!)
         self.poster.clipsToBounds = true
         self.poster.contentMode = .scaleAspectFill
-        styleLabel(self.name, text: "Hardcoded")
-        styleLabel(self.releaseDate, text: "Hardcoded")
-        styleLabel(self.rating, text: "★5")
+        styleLabel(self.name, text: title)
+        styleLabel(self.releaseDate, text: date)
+        styleLabel(self.rating, text: "★\(average)")
         self.overview.font = .systemFont(ofSize: UIFont.systemFontSize-3)
         self.overview.textColor = .white
-        self.overview.text = "Hardoced Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 15"
+        self.overview.text = over
         self.overview.numberOfLines = 0
         
+    }
+    
+    func unwrappingSafe(movie: Movies?){
+        if let imagePath = movie?.poster_path {
+            finalPath = Routes.imgBaseURL.rawValue + imagePath
+        }
+        
+        if let title = movie?.original_name {
+            self.title = title
+        }
+        
+        if let date = movie?.first_air_date {
+            self.date = date
+        }
+        
+        if let average = movie?.vote_average {
+            self.average = "\(average)"
+        }
+        
+        if let over = movie?.overview {
+            self.over = over
+        }
+        setup()
+        styleViews()
+        setupConstraints()
     }
     
     func styleLabel(_ label: UILabel, text: String) {

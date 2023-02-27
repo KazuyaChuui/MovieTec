@@ -29,7 +29,8 @@ class MoviesViewModel {
                     print("Invalid")
                 }
             }
-            
         }.resume()
     }
+    
+    
 }

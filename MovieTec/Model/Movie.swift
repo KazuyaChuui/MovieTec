@@ -7,51 +7,67 @@
 
 struct Movie: Codable{
     let id: Int
-    let original_title: String
-    let poster_Path: String?
-    let release_Date: String
+    let original_name: String
+    let poster_path: String?
+    let first_air_date: String
     let overview: String
-    let vote_average: Int
+    let vote_average: Float
     let genres: [Genre]
     let status: String
-
+    let production_companies: [productionCompanies]
+    
     private enum MovieCodingKeys: String, CodingKey {
         case id
-        case original_title
-        case poster_Path
-        case release_Date
+        case original_name
+        case poster_path
+        case first_air_date
         case overview
         case vote_average
         case genres
         case status
+        case production_companies
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MovieCodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
-        original_title = try container.decode(String.self, forKey: .original_title)
-        poster_Path = try container.decode(String?.self, forKey: .poster_Path)
-        release_Date = try container.decode(String.self, forKey: .release_Date)
+        original_name = try container.decode(String.self, forKey: .original_name)
+        poster_path = try container.decode(String?.self, forKey: .poster_path)
+        first_air_date = try container.decode(String.self, forKey: .first_air_date)
         overview = try container.decode(String.self, forKey: .overview)
-        vote_average = try container.decode(Int.self, forKey: .vote_average)
+        vote_average = try container.decode(Float.self, forKey: .vote_average)
         genres = try container.decode([Genre].self, forKey: .genres)
         status = try container.decode(String.self, forKey: .status)
+        production_companies = try container.decode([productionCompanies].self, forKey: .production_companies)
+    }
+}
+
+struct productionCompanies: Codable {
+    let logo_path: String?
+    
+    private enum productionCompaniesCodingKeys: String, CodingKey {
+        case logo_path
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: productionCompaniesCodingKeys.self)
+        logo_path = try container.decode(String?.self, forKey: .logo_path)
     }
 }
 
 struct Movies: Codable{
     let id: Int
-    let original_title: String
-    let poster_Path: String?
-    let release_Date: String
+    let original_name: String
+    let poster_path: String?
+    let first_air_date: String
     let overview: String
-    let vote_average: Int
+    let vote_average: Float
     
     private enum MoviesCodingKeys: String, CodingKey {
         case id
-        case original_title
-        case poster_Path
-        case release_Date
+        case original_name
+        case poster_path
+        case first_air_date
         case overview
         case vote_average
     }
@@ -59,11 +75,11 @@ struct Movies: Codable{
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MoviesCodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
-        original_title = try container.decode(String.self, forKey: .original_title)
-        poster_Path = try container.decode(String?.self, forKey: .poster_Path)
-        release_Date = try container.decode(String.self, forKey: .release_Date)
+        original_name = try container.decode(String.self, forKey: .original_name)
+        poster_path = try container.decode(String?.self, forKey: .poster_path)
+        first_air_date = try container.decode(String.self, forKey: .first_air_date)
         overview = try container.decode(String.self, forKey: .overview)
-        vote_average = try container.decode(Int.self, forKey: .vote_average)
+        vote_average = try container.decode(Float.self, forKey: .vote_average)
     }
 }
 

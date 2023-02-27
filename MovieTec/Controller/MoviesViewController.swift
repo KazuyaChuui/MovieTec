@@ -38,6 +38,7 @@ class MoviesViewController: UIViewController, UINavigationControllerDelegate {
         self.selectedCell.$cell.sink { cell in
             if( cell != -1){
                 let vc = DetailViewController()
+                vc.id = cell
                 self.present(vc, animated: true)
             }
         }.store(in: &cancellables)
