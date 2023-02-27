@@ -18,8 +18,6 @@ class LoginViewController: UIViewController {
         self.view = LoginView(viewModel: LoginViewModel())
     }
     
-    // MARK: - Methods
-    
     /*
     // MARK: - Navigation
 

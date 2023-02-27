@@ -21,6 +21,8 @@ class MoviesView: UIView {
     private var collectionV: UICollectionView?
     private var navController: UINavigationController?
     private var detailVC = DetailViewController()
+    var movies: Movies?
+    
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
@@ -38,12 +40,13 @@ class MoviesView: UIView {
     
     @objc func didTapButton(_ sender: UIBarButtonItem) {
         //var vc = ProfileViewController()
-        //self.inputViewController?.present(vc, animated: true)
         
     }
     
     @objc func segmentedValueChanged(_ sender: UISegmentedControl) {
-        
+        self.viewModel.getMovies(type: sender.selectedSegmentIndex) {
+            <#code#>
+        }
     }
     
     func setup() {
@@ -84,7 +87,6 @@ class MoviesView: UIView {
     }
     
     func setupConstraints() {
-        
         
         NSLayoutConstraint.activate([
             self.segmentedCtrl.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),

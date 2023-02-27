@@ -15,6 +15,8 @@ class LoginView: UIView, UITextFieldDelegate {
     private var logoImg = UIImageView()
     private let invalidLabel = UILabel()
     private let moviesVC = MoviesViewController()
+    private var token = ""
+    private var sessionID: String?
     
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -32,6 +34,18 @@ class LoginView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func showActivityIndicator() {
+        
+//        viewModel.createRequestToken() { [weak self] in
+//            self!.token = (self?.viewModel.token)!
+//        }
+//        print(self.token)
+//        viewModel.createSession(token: self.token) { [weak self] in
+//            self?.sessionID = self?.viewModel.sessionID
+//            print(self?.sessionID)
+//        }
+    }
+    
     func setup() {
         self.addSubview(self.logoImg)
         self.addSubview(self.usernameTF)
@@ -45,7 +59,6 @@ class LoginView: UIView, UITextFieldDelegate {
     
     @objc func didTapButton(_ sender: UIButton) {
         //self.invalidLabel.isHidden = false
-        //self.window?.rootViewController?.present(moviesVC, animated: true)
         self.window?.rootViewController = UINavigationController(rootViewController: moviesVC)
         self.window?.rootViewController?.present(moviesVC, animated: true)
     }
