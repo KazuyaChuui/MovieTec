@@ -17,6 +17,9 @@ class LoginView: UIView, UITextFieldDelegate {
     private let moviesVC = MoviesViewController()
     private var token = ""
     private var sessionID: String?
+    private var success: Bool?
+    private var aView: UIView?
+    
     
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -34,16 +37,66 @@ class LoginView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showActivityIndicator() {
+    func login(username: String, password: String) {
+        self.showSpinner()
+        viewModel.createRequestToken() { [weak self] in
+            self!.token = (self?.viewModel.token)!
+            DispatchQueue.main.async { [weak self] in
+                if(self!.token == ""){
+                    print(self?.token)
+                    self?.removeSpinner()
+                    self?.invalidLabel.isHidden = false
+                } else {
+                    self!.viewModel.createSessionWithLogin(username: username, password: password, token: self!.viewModel.token) { [weak self] in
+                        self?.success = self?.viewModel.success
+                        DispatchQueue.main.async { [weak self] in
+                            print(self?.success)
+                            if(self?.success == false) {
+                                print(username, password, self!.token)
+                                self?.removeSpinner()
+                                self?.invalidLabel.isHidden = false
+                            } else{
+                                self!.viewModel.createSession(token: self!.viewModel.token) { [weak self] in
+                                    self?.sessionID = self?.viewModel.sessionID
+                                    DispatchQueue.main.async { [weak self] in
+                                        self?.removeSpinner()
+                                        print("3")
+                                        if((self?.success) == true){
+                                            UserDefaults.standard.set(self?.sessionID, forKey: "sessionID")
+                                            UserDefaults.standard.set(true, forKey: "status")
+                                            Switcher.updateRootVC()
+                                            self!.window?.rootViewController = UINavigationController(rootViewController: self!.moviesVC)
+                                            self!.window?.rootViewController?.present(self!.moviesVC, animated: true)
+                                        }else {
+                                            self?.invalidLabel.isHidden = false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
         
-//        viewModel.createRequestToken() { [weak self] in
-//            self!.token = (self?.viewModel.token)!
-//        }
-//        print(self.token)
-//        viewModel.createSession(token: self.token) { [weak self] in
-//            self?.sessionID = self?.viewModel.sessionID
-//            print(self?.sessionID)
-//        }
+        
+    }
+    
+    func showSpinner(){
+        aView = UIView(frame: self.bounds)
+        aView?.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        
+        let ai = UIActivityIndicatorView(style: .large)
+        ai.center = aView!.center
+        ai.startAnimating()
+        aView?.addSubview(ai)
+        self.addSubview(aView!)
+    }
+    
+    func removeSpinner(){
+        aView?.removeFromSuperview()
+        aView = nil
     }
     
     func setup() {
@@ -59,8 +112,15 @@ class LoginView: UIView, UITextFieldDelegate {
     
     @objc func didTapButton(_ sender: UIButton) {
         //self.invalidLabel.isHidden = false
-        self.window?.rootViewController = UINavigationController(rootViewController: moviesVC)
-        self.window?.rootViewController?.present(moviesVC, animated: true)
+        
+        if (!self.usernameTF.text!.isEmpty || !self.passwordTF.text!.isEmpty){
+            self.invalidLabel.isHidden = true
+            login(username: self.usernameTF.text!, password: self.passwordTF.text!)
+        } else {
+            self.usernameTF.text = ""
+            self.passwordTF.text = ""
+            self.invalidLabel.isHidden = false
+        }
     }
     
     func styleViews(){
@@ -70,6 +130,7 @@ class LoginView: UIView, UITextFieldDelegate {
         self.logoImg.translatesAutoresizingMaskIntoConstraints = false
         styleTF(self.usernameTF, pHolder: "Username")
         styleTF(self.passwordTF, pHolder: "Password")
+        self.passwordTF.isSecureTextEntry = true
         styleBtn(self.btnLogin, title: "Login")
         self.invalidLabel.textColor = .systemRed
         self.invalidLabel.font = .boldSystemFont(ofSize: UIFont.systemFontSize)

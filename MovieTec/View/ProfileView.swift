@@ -17,15 +17,23 @@ class ProfileView: UIView {
     private var profileImg = UIImageView()
     private let favorite = UILabel()
     private var collectionV: UICollectionView?
-    
+    var account: Account?
+    var finalPath = "https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
+
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
-        self.setup()
-        self.styleViews()
-        self.setupConstraints()
+        self.viewModel.getAccountInfo {
+            self.account = self.viewModel.account
+            DispatchQueue.main.async { [weak self] in
+                self!.setup()
+                self!.styleViews()
+                self!.setupConstraints()
+            }
+        }
+
     }
     
     required init?(coder: NSCoder) {
@@ -59,13 +67,16 @@ class ProfileView: UIView {
         self.favorite.textColor = #colorLiteral(red: 0.5647058824, green: 0.8078431373, blue: 0.631372549, alpha: 1)
         self.favorite.font = .boldSystemFont(ofSize: 15)
         
-        self.username.text = "Username"
+        self.username.text = self.account?.username ?? ""
         self.username.textColor = #colorLiteral(red: 0.5647058824, green: 0.8078431373, blue: 0.631372549, alpha: 1)
         self.username.font = .systemFont(ofSize: UIFont.systemFontSize)
         
-        let image = #imageLiteral(resourceName: "Logo")
+        if let imagePath = account?.avatar.tmdb.avatar_path {
+            finalPath = Routes.imgBaseURL.rawValue + imagePath
+        }
+        
         self.profileImg.layer.cornerRadius = 120 / 2
-        self.profileImg.image = image
+        self.profileImg.load(from: URL(string: finalPath)!)
         self.profileImg.clipsToBounds = true
         self.profileImg.layer.masksToBounds = true
         self.profileImg.contentMode = .scaleAspectFill

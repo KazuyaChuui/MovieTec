@@ -32,3 +32,18 @@ extension UIImageView {
         }.resume()
     }
 }
+
+class Switcher {
+    static func updateRootVC(){
+    
+        let status = UserDefaults.standard.bool(forKey: "status")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        print(status)
+        if( status ){
+            appDelegate.window?.rootViewController = UINavigationController(rootViewController: MoviesViewController())
+        } else {
+            appDelegate.window?.rootViewController = LoginViewController()
+        }
+                        
+    }
+}

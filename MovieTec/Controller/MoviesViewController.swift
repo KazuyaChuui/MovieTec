@@ -12,6 +12,8 @@ class MoviesViewController: UIViewController, UINavigationControllerDelegate {
 
     private var selectedCell: MoviesView = MoviesView(viewModel: MoviesViewModel())
     private var cancellables = Set<AnyCancellable>()
+    private var viewModel = MoviesViewModel()
+    var success: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,19 @@ class MoviesViewController: UIViewController, UINavigationControllerDelegate {
         }
 
         let logOut = UIAlertAction(title: "Log Out", style: .destructive) { (action) in
-            
+            UserDefaults.standard.set(false, forKey: "status")
+            Switcher.updateRootVC()
+            self.viewModel.deleteSession {
+                self.success = self.viewModel.success
+                DispatchQueue.main.async { [weak self] in
+                    if(self!.success!){
+                        let loginVC = LoginViewController()
+                        loginVC.modalPresentationStyle = .fullScreen
+                        self!.view.window?.rootViewController?.present(loginVC, animated: true)
+                    }
+                }
+               
+            }
         }
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in

@@ -12,6 +12,7 @@ class LoginViewModel {
     
     var token = ""
     var sessionID = ""
+    var success = false
     
     func createRequestToken(completion: @escaping () ->()) {
         var components = URLComponents()
@@ -40,19 +41,25 @@ class LoginViewModel {
         var components = URLComponents()
         components.path = Routes.sessionLogin.rawValue
         components.queryItems = [URLQueryItem(name: "api_key", value: Routes.apiKey.rawValue)]
-        let body = ["username":username, "password":password, "request_token":token]
-        let bodyData = try? JSONSerialization.data(withJSONObject: body)
+        let upDataModel = UploadData(username: username, password: password, request_token: token)
+        guard let jsonData = try? JSONEncoder().encode(upDataModel) else {
+            print("Error JSON data")
+            return
+        }
+        
         let url = URL(string: Routes.baseURL.rawValue + components.string!)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        print(token)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = jsonData
 
-        URLSession.shared.uploadTask(with: request, from: bodyData) {[weak self] data, response, error in
+        URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
             if let error = error {
                 print(error)
             } else if let data = data {
-                if let session = try? JSONDecoder().decode(SessionResponse.self, from: data){
-                    self?.sessionID = session.session_id
+                if let session = try? JSONDecoder().decode(SessionResponseNoID.self, from: data){
+                    self?.success = session.success
                     completion()
                 } else {
                     print("Invalid")
@@ -62,28 +69,32 @@ class LoginViewModel {
     }
     
     func createSession(token: String, completion: @escaping () ->()) {
+        print("token \(token)")
         var components = URLComponents()
         components.path = Routes.sessionIni.rawValue
         components.queryItems = [URLQueryItem(name: "api_key", value: Routes.apiKey.rawValue)]
-        let body = ["request_token":token]
-        let bodyData = try? JSONSerialization.data(withJSONObject: body)
+        let upDataModel = UploadRequest(request_token: token)
+        guard let jsonData = try? JSONEncoder().encode(upDataModel) else {
+            print("Error JSON data")
+            return
+        }
+        
         let url = URL(string: Routes.baseURL.rawValue + components.string!)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = jsonData
 
-        URLSession.shared.uploadTask(with: request, from: bodyData) {[weak self] data, response, error in
+        URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
             if let error = error {
                 print(error)
             } else if let data = data {
                 if let session = try? JSONDecoder().decode(SessionResponse.self, from: data){
-                    if(session.success) {
-                        self?.sessionID = session.session_id
-                        completion()
-                    } else {
-                        self?.sessionID = ""
-                    }
+                    self?.success = session.success
+                    self?.sessionID = session.session_id
+                    completion()
                 } else {
-                    //print(response)
                     print("Invalid")
                 }
             }
